@@ -9,10 +9,9 @@ void main() {
     late TankerKoenigApi api;
 
     setUp(() {
-      //  assert(apiKey != null,
-      //      'ApiKey `API_KEY` from environment NOT readable or NOT available!');
-      api = TankerKoenigApi(
-          /*apiKey as String*/ 'c2e9b4de-1aa2-22eb-3284-a24b4cf1a9fd');
+      assert(apiKey != null,
+          'ApiKey `API_KEY` from environment NOT readable or NOT available!');
+      api = TankerKoenigApi(apiKey as String);
     });
 
     test('getStationsByLatLng Test', () async {
