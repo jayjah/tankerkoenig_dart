@@ -29,4 +29,4 @@ jobs:
       - name: Run test suite
         env:
           API_KEY: ${{ secrets.API_KEY }}
-        run: dart test
+        run: dart run test --chain-stack-traces
