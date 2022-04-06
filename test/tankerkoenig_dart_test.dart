@@ -1,7 +1,6 @@
-import 'package:tankerkoenig_dart/tankerkoenig_dart.dart';
-import 'package:test/test.dart';
-
 import 'dart:io' show Platform;
+
+import 'package:test/test.dart';
 
 void main() {
   group('Calendarific API Test', () {
