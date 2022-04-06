@@ -1,0 +1,688 @@
+openapi: "3.0.3"
+servers:
+  - url: 'https://creativecommons.tankerkoenig.de/api/v4'
+info:
+  version: 4.0.6
+  title: Tankerkönig API
+  description: 
+    API for getting real time gas prices from
+    https:\/\/creativecommons.tankerkoenig.de. Real time gas price data is
+    available under open data/open source license even for commercial use.
+    Currently only prices for Germany are available.
+  contact:
+    name: Tankerkoenig API Support
+    url: 'https://creativecommons.tankerkoenig.de/'
+    email: info@tankerkoenig.de
+paths:
+  /stations/search:
+    get:
+      tags:
+        - search
+      description: Aktuelle Kraftstoffpreise an Tankstellen im Umkreis
+      parameters:
+        - name: apikey
+          in: query
+          required: true
+          description: Gültiger API-key / Valid API key.
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cffa4fb8-7a16-cd85-7946-263722530f15
+        - name: lat
+          in: query
+          required: true
+          description: Latitude
+          schema:
+            type: number
+          example: 48.8
+        - name: lng
+          in: query
+          required: true
+          description: Longitude
+          schema:
+            type: number
+          example: 9.24
+        - name: rad
+          in: query
+          description: Radius in km (max 25)
+          schema:
+            type: number
+            minimum: 0
+            maximum: 25
+          example: 10
+      responses:
+        '200':
+          description: Tankstellenliste mit aktuellen Kraftstoffpreisen
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-200'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-400'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-401'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+        '503':
+          description: Service Unavailable - rate limit exceeded
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-503'
+  /stations/ids:
+    get:
+      tags:
+        - search
+      description: Aktuelle Kraftstoffpreise an Tankstellen nach IDs
+      parameters:
+        - name: apikey
+          in: query
+          required: true
+          description: Gültiger API-key / Valid API key.
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cffa4fb8-7a16-cd85-7946-263722530f15
+        - name: ids
+          in: query
+          required: true
+          description: 
+            Liste von Land, Tankstellen-IDs (komma-separiert) / List of country
+            / station ids (comma separated).
+          schema:
+            type: string
+          example: 92f703e8-0b3c-46da-9948-25cb1a6a1514,83d5ac80-4f23-4106-b054-7c7704bfcb95
+        - name: lat
+          in: query
+          required: false
+          description: Latitude. If latitude and longitude are given, dist to this coordinates is shown in the output
+          schema:
+            type: number
+          example: 48.8
+        - name: lng
+          in: query
+          required: false
+          description: Longitude. If latitude and longitude are given, dist to this coordinates is shown in the output
+          schema:
+            type: number
+          example: 9.24
+      responses:
+        '200':
+          description: Liste von Tankstellen.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-200'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-400'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-401'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+        '503':
+          description: Service Unavailable - rate limit exceeded
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-503'
+  /stations/postalcode:
+    get:
+      tags:
+        - search
+      description: Aktuelle Kraftstoffpreise an Tankstellen nach Postleitzahl
+      parameters:
+        - name: apikey
+          in: query
+          required: true
+          description: Gültiger API-key / Valid API key.
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cffa4fb8-7a16-cd85-7946-263722530f15
+        - name: postalcode
+          in: query
+          required: true
+          description: 'Land:Postleitzahl / county:postalcode'
+          schema:
+            type: string
+          example: '70372'
+      responses:
+        '200':
+          description: Liste von Tankstellen.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-200'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-400'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-401'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+        '503':
+          description: Service Unavailable - rate limit exceeded
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-503'
+  /stats:
+    get:
+      tags:
+        - statistics
+      summary: ''
+      description: ''
+      parameters:
+        - name: apikey
+          in: query
+          required: true
+          description: Gültiger API-key / Valid API key.
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cffa4fb8-7a16-cd85-7946-263722530f15
+      responses:
+        '200':
+          description: Statistik / Statistics
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-stats-200'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-400'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-401'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+        '503':
+          description: Service Unavailable - rate limit exceeded
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+  /complaint:
+    post:
+      tags:
+        - complaint
+      summary: Send a complaint with correction
+      description: There are several complaint types allowed, see complaint model. Correction depends on complaint type -- wrongPrice - the correct price as float. wrongPetrolLocation - correct location as LAT,LON (2 floats). Omitted for wrongStatus. For all others - corrected value
+      requestBody:
+        description: Content of complaint with corrrection
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/complaint'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-stats-200'
+        '400':
+          description: Bad Request
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-400'
+        '401':
+          description: Unauthorized - invalid API key
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-401'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/response-500'
+components:
+  schemas:
+    response-200:
+      type: object
+      required:
+        - stations
+        - apiVersion
+        - timestamp
+      properties:
+        apiVersion:
+          type: string
+          example: 4.0.6
+        timestamp:
+          type: string
+          format: date-time
+          example: '2020-01-04T22:14:06+01:00'
+        stations:
+          $ref: '#/components/schemas/stations'
+    fuelstat:
+      type: object
+      properties:
+        count:
+          type: number
+          format: integer
+          example: 12345
+        mean:
+          type: number
+          format: float
+          example: 1.11
+        median:
+          type: number
+          format: float
+          example: 1.12
+    station:
+      type: object
+      required:
+        - id
+        - coords
+        - fuels
+        - postalCode
+      properties:
+        country:
+          type: string
+          example: de
+        id:
+          type: string
+          example: 83d5ac80-4f23-4106-b054-7c7704bfcb95
+        name:
+          type: string
+          example: Aral Tankstelle
+        brand:
+          type: string
+          example: ARAL
+        street:
+          type: string
+          example: Cannstatter Straße 3
+        postalCode:
+          type: string
+          example: "70190"
+        place:
+          type: string
+          example: Stuttgart
+        coords:
+          type: object
+          required:
+            - lat
+            - lng
+          properties:
+            lat:
+              type: number
+              format: float
+              example: 48.78922
+            lng:
+              type: number
+              format: float
+              example: 9.192324
+        isOpen:
+          type: boolean
+          example: true
+        closesAt:
+          type: string
+          format: date-time
+          example: '2020-01-05T06:00:00+01:00'
+        opensAt:
+          type: string
+          format: date-time
+          example: '2020-01-05T06:00:00+01:00'
+        openingTimes:
+          type: array
+          items:
+            type: object
+            properties:
+              days:
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - mon
+                    - tue
+                    - wed
+                    - thu
+                    - fri
+                    - sat
+                    - sun
+                    - hol
+              times:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    open:
+                      type: string
+                      pattern: '^\d{2}:\d{2}$'
+                      example: '06:00'
+                    close:
+                      type: string
+                      pattern: '^\d{2}:\d{2}$'
+                      example: '20:00'
+        dist:
+          type: number
+          format: float
+          example: 2.5
+        fuels:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - category
+              - price
+            properties:
+              category:
+                type: string
+                enum:
+                  - diesel
+                  - lpg
+                  - gasoline
+                  - cng
+                example: gasoline
+              name:
+                type: string
+                example: Super E5
+              price:
+                type: number
+                format: float
+                example: 1.399
+              lastChange:
+                type: object
+                required:
+                  - timestamp
+                  - amount
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: '2020-01-04T22:05:06+01'
+                  amount:
+                    type: number
+                    format: float
+                    example: -0.07
+    stations:
+      type: array
+      items:
+        $ref: '#/components/schemas/station'
+    openingTimes:
+      type: array
+      items:
+        type: object
+        properties:
+          days:
+            type: array
+            items:
+              type: string
+              enum:
+                - mon
+                - tue
+                - wed
+                - thu
+                - fri
+                - sat
+                - sun
+                - hol
+          times:
+            type: array
+            items:
+              type: object
+              properties:
+                open:
+                  type: string
+                  pattern: '^\d{2}:\d{2}$'
+                  example: '06:00'
+                close:
+                  type: string
+                  pattern: '^\d{2}:\d{2}$'
+                  example: '20:00'
+    days:
+      type: array
+      items:
+        type: string
+        enum:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+          - sat
+          - sun
+          - hol
+    times:
+      type: array
+      items:
+        type: object
+        properties:
+          open:
+            type: string
+            pattern: '^\d{2}:\d{2}$'
+            example: '06:00'
+          close:
+            type: string
+            pattern: '^\d{2}:\d{2}$'
+            example: '20:00'
+    openingTimesEntry:
+      type: object
+      properties:
+        days:
+          type: array
+          items:
+            type: string
+            enum:
+              - mon
+              - tue
+              - wed
+              - thu
+              - fri
+              - sat
+              - sun
+              - hol
+        times:
+          type: array
+          items:
+            type: object
+            properties:
+              open:
+                type: string
+                pattern: '^\d{2}:\d{2}$'
+                example: '06:00'
+              close:
+                type: string
+                pattern: '^\d{2}:\d{2}$'
+                example: '20:00'
+    fuel:
+      type: object
+      required:
+        - name
+        - category
+        - price
+      properties:
+        category:
+          type: string
+          enum:
+            - diesel
+            - lpg
+            - gasoline
+            - cng
+          example: gasoline
+        name:
+          type: string
+          example: Super E5
+        price:
+          type: number
+          format: float
+          example: 1.399
+        lastChange:
+          type: object
+          required:
+            - timestamp
+            - amount
+          properties:
+            timestamp:
+              type: string
+              format: date-time
+              example: '2020-01-04T22:05:06+01'
+            amount:
+              type: number
+              format: float
+              example: -0.07
+    complaint:
+      description: Complaint entry, used to give  feedback for incorrect data.
+      type: object
+      required:
+        - apikey
+        - id
+        - type
+      properties:
+        apikey:
+          description: API key of the submitter
+          type: string
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cffa4fb8-7a16-cd85-7946-263722530f15
+        id:
+          description: UUID of station for which a complaint is sent
+          type: string
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          example: cb1f0588-d517-40f0-8ce3-3edadebea40d
+        type:
+          description: Type of complaint
+          type: string
+          enum:
+            - wrongPetrolStationName
+            - wrongStatusOpen
+            - wrongStatusClosed
+            - wrongPriceE5
+            - wrongPriceE10
+            - wrongPriceDiesel
+            - wrongPetrolStationBrand
+            - wrongPetrolStationStreet
+            - wrongPetrolStationHouseNumber
+            - wrongPetrolStationPostcode
+            - wrongPetrolStationPlace
+            - wrongPetrolStationLocation
+          example: wrongStatusOpen
+        correction:
+          description: wrongPrice - the correct price as float. wrongPetrolLocation - correct location as LAT,LON (2 floats). Omitted for wrongStatus. For all others - corrected value
+          type: string
+          example: ""
+    response-400:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: number
+          example: 400
+        message:
+          type: string
+          example: Bad request
+    response-stats-200:
+      type: object
+      required:
+        - license
+        - apiVersion
+        - timestamp
+      properties:
+        apiVersion:
+          type: string
+          example: 4.0.6
+        timestamp:
+          type: string
+          format: date-time
+          example: '2020-01-04T22:14:06+01:00'
+        license:
+          type: string
+          example: CC BY NC http://www.tankerkoenig.de
+        Diesel:
+          $ref: '#/components/schemas/fuelstat'
+        E5:
+          $ref: '#/components/schemas/fuelstat'
+        E10:
+          $ref: '#/components/schemas/fuelstat'
+    response-401:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: number
+          example: 401
+        message:
+          type: string
+          example: Unauthorized - invalid API key
+    response-500:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: number
+          example: 500
+        message:
+          type: string
+          example: Internal Server Error
+    response-503:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: number
+          example: 503
+        message:
+          type: string
+          example: Service Unavailable - rate limit exceeded
