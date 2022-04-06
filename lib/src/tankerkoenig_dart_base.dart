@@ -1,4 +1,3 @@
-import 'package:tankerkoenig_dart/src/models/exception.dart';
 import 'package:tankerkoenig_dart/src/models/models.dart';
 
 /// Basic interface class for tankerkoenig api
