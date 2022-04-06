@@ -10,10 +10,10 @@ import 'package:tankerkoenig_dart/src/tankerkoenig_dart_base.dart';
 /// Basic implementation class for tankerkoenig api of [TankerKoenigDartApi]
 class TankerKoenigApi extends TankerKoenigDartApi {
   final String _apiKey;
-  final TankerKoenigClient client;
+  final TankerKoenigClient _client;
 
   TankerKoenigApi(this._apiKey)
-      : client = TankerKoenigClient.create(ChopperClient());
+      : _client = TankerKoenigClient.create(ChopperClient());
 
   /// Retrieve gas stations by given [latitude] and [longitude]. Those values
   ///   must be provided.
@@ -29,7 +29,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     int radius = 10,
   }) async {
     final Response<dynamic> response =
-        await client.getStationsByLatLng(_apiKey, latitude, longitude, radius);
+        await _client.getStationsByLatLng(_apiKey, latitude, longitude, radius);
 
     print(
         'TankerKoenig :: getStationsByLatLng lat=$latitude;$longitude=$longitude :: Response code: ${response.statusCode} msg: ${response.body}');
@@ -51,7 +51,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   Future<List<Station>?> getStationsByPostalCode(
       {required int postalCode}) async {
     final Response<dynamic> response =
-        await client.getStationsByPostalCode(_apiKey, postalCode);
+        await _client.getStationsByPostalCode(_apiKey, postalCode);
 
     print(
         'TankerKoenig :: getStationsByPostalCode postalCode=$postalCode :: Response code: ${response.statusCode} msg: ${response.body}');
@@ -71,7 +71,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   /// It may return [Null] on unexpected parse error.
   @override
   Future<Statistic> getStatistics() async {
-    final Response<dynamic> response = await client.getStatistics(_apiKey);
+    final Response<dynamic> response = await _client.getStatistics(_apiKey);
 
     if (response.statusCode != 200) {
       throw getExceptionFromResponse(response.statusCode);
