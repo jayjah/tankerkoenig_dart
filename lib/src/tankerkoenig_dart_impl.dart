@@ -23,7 +23,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<List<Station>?> getStationsByLatLng({
+  Future<List<Station>?> stationsByLatLng({
     required double latitude,
     required double longitude,
     int radius = 10,
@@ -35,7 +35,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         'TankerKoenig :: getStationsByLatLng lat=$latitude;$longitude=$longitude :: Response code: ${response.statusCode} msg: ${response.body}');
 
     if (response.statusCode != 200) {
-      throw getExceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response.statusCode);
     }
 
     return null;
@@ -48,8 +48,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<List<Station>?> getStationsByPostalCode(
-      {required int postalCode}) async {
+  Future<List<Station>?> stationsByPostalCode({required int postalCode}) async {
     final Response<dynamic> response =
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
@@ -57,7 +56,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         'TankerKoenig :: getStationsByPostalCode postalCode=$postalCode :: Response code: ${response.statusCode} msg: ${response.body}');
 
     if (response.statusCode != 200) {
-      throw getExceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response.statusCode);
     }
 
     return null;
@@ -67,14 +66,12 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///   and `E10`.
   ///
   /// It may throw a [TankerKoenigException] error on API error.
-  ///
-  /// It may return [Null] on unexpected parse error.
   @override
-  Future<Statistic> getStatistics() async {
+  Future<Statistic> statistics() async {
     final Response<dynamic> response = await _client.getStatistics(_apiKey);
 
     if (response.statusCode != 200) {
-      throw getExceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response.statusCode);
     }
 
     return Statistic.fromJson(

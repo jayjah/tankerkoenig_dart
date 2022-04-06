@@ -15,7 +15,7 @@ void main() {
     });
 
     test('getStationsByLatLng Test', () async {
-      final List<Station>? data = await api.getStationsByLatLng(
+      final List<Station>? data = await api.stationsByLatLng(
           latitude: 52.52099975265203, longitude: 13.43803882598877);
       expect(data, isNotNull);
       expect(data, isNotEmpty);
@@ -23,13 +23,13 @@ void main() {
 
     test('getStationsByPostalCode Test', () async {
       final List<Station>? data =
-          await api.getStationsByPostalCode(postalCode: 24558);
+          await api.stationsByPostalCode(postalCode: 24558);
       expect(data, isNotNull);
       expect(data, isNotEmpty);
     });
 
     test('getStatistics Test', () async {
-      final Statistic data = await api.getStatistics();
+      final Statistic data = await api.statistics();
       expect(data.stats, isNotEmpty);
       expect(
         true,

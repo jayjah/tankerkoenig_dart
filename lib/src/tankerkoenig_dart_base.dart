@@ -2,15 +2,15 @@ import 'package:tankerkoenig_dart/src/models/models.dart';
 
 /// Basic interface class for tankerkoenig api
 abstract class TankerKoenigDartApi {
-  Future<List<Station>?> getStationsByLatLng({
+  Future<List<Station>?> stationsByLatLng({
     required double latitude,
     required double longitude,
     int radius = 10,
   });
-  Future<List<Station>?> getStationsByPostalCode({required int postalCode});
-  Future<Statistic> getStatistics();
+  Future<List<Station>?> stationsByPostalCode({required int postalCode});
+  Future<Statistic> statistics();
 
-  Exception getExceptionFromResponse(int statusCode) {
+  Exception exceptionFromResponse(int statusCode) {
     switch (statusCode) {
       case 400:
         return const TankerKoenigException(
