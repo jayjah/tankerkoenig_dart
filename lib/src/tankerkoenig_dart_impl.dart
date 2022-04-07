@@ -35,14 +35,11 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       radius,
     );
 
-    print(
-        'TankerKoenig :: getStationsByLatLng lat=$latitude;$longitude=$longitude :: Response code: ${response.statusCode} msg: ${response.body}');
-
     if (response.statusCode != 200) {
       throw exceptionFromResponse(response.statusCode);
     }
 
-    return null;
+    return Station.fromJsonList(jsonDecode(response.bodyString));
   }
 
   /// Retrieve gas stations by given [postalCode]. Those value
@@ -56,14 +53,11 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     final Response<dynamic> response =
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
-    print(
-        'TankerKoenig :: getStationsByPostalCode postalCode=$postalCode :: Response code: ${response.statusCode} msg: ${response.body}');
-
     if (response.statusCode != 200) {
       throw exceptionFromResponse(response.statusCode);
     }
 
-    return null;
+    return Station.fromJsonList(jsonDecode(response.bodyString));
   }
 
   /// Retrieve statistics about gas types. These are normally `Diesel`, `E5`
@@ -97,14 +91,11 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       <String>[id],
     );
 
-    print(
-        'TankerKoenig :: stationById id=$id :: Uri: ${response.base.request?.url} Response code: ${response.statusCode} msg: ${response.body}');
-
     if (response.statusCode != 200) {
       throw exceptionFromResponse(response.statusCode);
     }
 
-    return null;
+    return Station.fromJsonList(jsonDecode(response.bodyString))?.first;
   }
 
   /// Retrieve gas stations by given [ids].
@@ -117,13 +108,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     final Response<dynamic> response =
         await _client.getStationsByIds(_apiKey, ids);
 
-    print(
-        'TankerKoenig :: stationsByIds ids=$ids :: Uri: ${response.base.request?.url} Response code: ${response.statusCode} msg: ${response.body}');
-
     if (response.statusCode != 200) {
       throw exceptionFromResponse(response.statusCode);
     }
 
-    return null;
+    return Station.fromJsonList(jsonDecode(response.bodyString));
   }
 }

@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_dynamic_calls
 
+part of 'models.dart';
+
 /// Statistic data class
 ///   Holds specific statistic types in a list
 class Statistic {

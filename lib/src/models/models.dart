@@ -1,5 +1,7 @@
 library models;
 
-export 'exception.dart';
-export 'station.dart';
-export 'statistic.dart';
+part 'fuel.dart';
+part 'exception.dart';
+part 'last_change.dart';
+part 'station.dart';
+part 'statistic.dart';

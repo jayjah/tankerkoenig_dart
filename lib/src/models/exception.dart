@@ -1,3 +1,5 @@
+part of 'models.dart';
+
 /// Exception class
 class TankerKoenigException implements Exception {
   final String message;
