@@ -28,8 +28,12 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     required double longitude,
     int radius = 10,
   }) async {
-    final Response<dynamic> response =
-        await _client.getStationsByLatLng(_apiKey, latitude, longitude, radius);
+    final Response<dynamic> response = await _client.getStationsByLatLng(
+      _apiKey,
+      latitude,
+      longitude,
+      radius,
+    );
 
     print(
         'TankerKoenig :: getStationsByLatLng lat=$latitude;$longitude=$longitude :: Response code: ${response.statusCode} msg: ${response.body}');
@@ -79,5 +83,47 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         response.bodyString,
       ),
     );
+  }
+
+  /// Retrieve gas station by given [id].
+  ///
+  /// It may throw a [TankerKoenigException] error on API error.
+  @override
+  Future<Station?> stationById({required String id}) async {
+    assert(id.isNotEmpty, 'Provided id must not be empty!');
+
+    final Response<dynamic> response = await _client.getStationsByIds(
+      _apiKey,
+      <String>[id],
+    );
+
+    print(
+        'TankerKoenig :: stationById id=$id :: Uri: ${response.base.request?.url} Response code: ${response.statusCode} msg: ${response.body}');
+
+    if (response.statusCode != 200) {
+      throw exceptionFromResponse(response.statusCode);
+    }
+
+    return null;
+  }
+
+  /// Retrieve gas stations by given [ids].
+  ///
+  /// It may throw a [TankerKoenigException] error on API error.
+  @override
+  Future<List<Station>?> stationsByIds({required List<String> ids}) async {
+    assert(ids.isNotEmpty, 'Provided ids must not be empty!');
+
+    final Response<dynamic> response =
+        await _client.getStationsByIds(_apiKey, ids);
+
+    print(
+        'TankerKoenig :: stationsByIds ids=$ids :: Uri: ${response.base.request?.url} Response code: ${response.statusCode} msg: ${response.body}');
+
+    if (response.statusCode != 200) {
+      throw exceptionFromResponse(response.statusCode);
+    }
+
+    return null;
   }
 }

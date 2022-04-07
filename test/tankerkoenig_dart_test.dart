@@ -28,6 +28,21 @@ void main() {
       expect(data, isNotEmpty);
     });
 
+    test('getStationById Test', () async {
+      final Station? data =
+          await api.stationById(id: '92f703e8-0b3c-46da-9948-25cb1a6a1514');
+      expect(data, isNotNull);
+    });
+
+    test('getStationsByIds Test', () async {
+      final List<Station>? data = await api.stationsByIds(ids: <String>[
+        '92f703e8-0b3c-46da-9948-25cb1a6a1514',
+        '83d5ac80-4f23-4106-b054-7c7704bfcb95',
+      ]);
+      expect(data, isNotNull);
+      expect(data, isNotEmpty);
+    });
+
     test('getStatistics Test', () async {
       final Statistic data = await api.statistics();
       expect(data.stats, isNotEmpty);

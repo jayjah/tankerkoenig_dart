@@ -29,6 +29,15 @@ abstract class TankerKoenigClient extends ChopperService {
   );
 
   @Get(
+    path: "/stations/ids?ids={ids}&apikey={api_key}",
+    headers: <String, String>{"Content-Type": "application/json"},
+  )
+  Future<Response<dynamic>> getStationsByIds(
+    @Path('api_key') String apiKey,
+    @Path('ids') List<String> ids,
+  );
+
+  @Get(
     path: "/stats?apikey={api_key}",
     headers: <String, String>{"Content-Type": "application/json"},
   )

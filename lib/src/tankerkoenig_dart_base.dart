@@ -8,6 +8,8 @@ abstract class TankerKoenigDartApi {
     int radius = 10,
   });
   Future<List<Station>?> stationsByPostalCode({required int postalCode});
+  Future<List<Station>?> stationsByIds({required List<String> ids});
+  Future<Station?> stationById({required String id});
   Future<Statistic> statistics();
 
   Exception exceptionFromResponse(int statusCode) {

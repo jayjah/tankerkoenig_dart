@@ -43,6 +43,25 @@ class _$TankerKoenigClient extends TankerKoenigClient {
   }
 
   @override
+  Future<Response<dynamic>> getStationsByIds(String apiKey, List<String> ids) {
+    String idsStr = '';
+    for (int i = 0; i < ids.length; i++) {
+      if (i + 1 < ids.length)
+        idsStr += '${ids[i]},';
+      else
+        idsStr += '${ids[i]}';
+    }
+    final $url =
+        'https://creativecommons.tankerkoenig.de/api/v4/stations/ids?ids=${idsStr}&apikey=${apiKey}';
+    final $headers = {
+      'Content-Type': 'application/json',
+    };
+
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
   Future<Response<dynamic>> getStatistics(String apiKey) {
     final $url =
         'https://creativecommons.tankerkoenig.de/api/v4/stats?apikey=${apiKey}';
