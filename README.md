@@ -12,6 +12,7 @@ and the Flutter guide for
 -->
 
 ![Dart](https://img.shields.io/badge/Dart-2.16.1-green)
+[![pub](https://img.shields.io/pub/v/tankerkoenig_dart.svg)](https://pub.dev/packages/tankerkoenig_dart)
 
 A dart package to retrieve germans gas stations and gas prices from tankerkoenig v4 API.
 
