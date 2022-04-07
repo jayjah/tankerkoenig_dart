@@ -3,7 +3,7 @@ description: |
   A dart package to retrieve data from tankerkoenig API.
   Get petrol stations, gas prices and the corresponding location 
   from their API.
-version: 1.0.2
+version: 0.0.1
 repository: https://github.com/jayjah/tankerkoenig_dart
 homepage: https://markus.jayjah.de
 
