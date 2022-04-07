@@ -82,6 +82,8 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   /// Retrieve gas station by given [id].
   ///
   /// It may throw a [TankerKoenigException] error on API error.
+  ///
+  /// It may return [Null] on unexpected parse error.
   @override
   Future<Station?> stationById({required String id}) async {
     assert(id.isNotEmpty, 'Provided id must not be empty!');
@@ -101,6 +103,8 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   /// Retrieve gas stations by given [ids].
   ///
   /// It may throw a [TankerKoenigException] error on API error.
+  ///
+  /// It may return [Null] on unexpected parse error.
   @override
   Future<List<Station>?> stationsByIds({required List<String> ids}) async {
     assert(ids.isNotEmpty, 'Provided ids must not be empty!');
