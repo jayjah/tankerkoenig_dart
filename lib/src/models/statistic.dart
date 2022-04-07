@@ -13,23 +13,23 @@ class Statistic {
         case StatType.diesel:
           return StatisticType(
             e,
-            json['Diesel']['count'] as int,
-            json['Diesel']['mean'] as double,
-            json['Diesel']['median'] as double,
+            int.parse(json['Diesel']['count']!.toString()),
+            double.parse(json['Diesel']['mean']!.toString()),
+            double.parse(json['Diesel']['median']!.toString()),
           );
         case StatType.e5:
           return StatisticType(
             e,
-            json['E5']['count'] as int,
-            json['E5']['mean'] as double,
-            json['E5']['median'] as double,
+            int.parse(json['E5']['count']!.toString()),
+            double.parse(json['E5']['mean']!.toString()),
+            double.parse(json['E5']['median']!.toString()),
           );
         case StatType.e10:
           return StatisticType(
             e,
-            json['E10']['count'] as int,
-            json['E10']['mean'] as double,
-            json['E10']['median'] as double,
+            int.parse(json['E10']['count']!.toString()),
+            double.parse(json['E10']['mean']!.toString()),
+            double.parse(json['E10']['median']!.toString()),
           );
       }
     }).toList(growable: false));
