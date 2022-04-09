@@ -2,13 +2,13 @@ import 'package:tankerkoenig_dart/src/models/models.dart';
 
 /// Basic interface class for tankerkoenig api
 abstract class TankerKoenigDartApi {
-  Future<List<Station>?> stationsByLatLng({
+  Future<Iterable<Station>?> stationsByLatLng({
     required double latitude,
     required double longitude,
     int radius = 10,
   });
-  Future<List<Station>?> stationsByPostalCode({required int postalCode});
-  Future<List<Station>?> stationsByIds({required List<String> ids});
+  Future<Iterable<Station>?> stationsByPostalCode({required int postalCode});
+  Future<Iterable<Station>?> stationsByIds({required List<String> ids});
   Future<Station?> stationById({required String id});
   Future<Statistic> statistics();
 

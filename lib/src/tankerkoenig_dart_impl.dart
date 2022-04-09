@@ -23,7 +23,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<List<Station>?> stationsByLatLng({
+  Future<Iterable<Station>?> stationsByLatLng({
     required double latitude,
     required double longitude,
     int radius = 10,
@@ -49,7 +49,8 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<List<Station>?> stationsByPostalCode({required int postalCode}) async {
+  Future<Iterable<Station>?> stationsByPostalCode(
+      {required int postalCode}) async {
     final Response<dynamic> response =
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
@@ -106,7 +107,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<List<Station>?> stationsByIds({required List<String> ids}) async {
+  Future<Iterable<Station>?> stationsByIds({required List<String> ids}) async {
     assert(ids.isNotEmpty, 'Provided ids must not be empty!');
 
     final Response<dynamic> response =

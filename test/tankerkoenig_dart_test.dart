@@ -15,14 +15,14 @@ void main() {
     });
 
     test('getStationsByLatLng Test', () async {
-      final List<Station>? data = await api.stationsByLatLng(
+      final Iterable<Station>? data = await api.stationsByLatLng(
           latitude: 52.52099975265203, longitude: 13.43803882598877);
       expect(data, isNotNull);
       expect(data, isNotEmpty);
     });
 
     test('getStationsByPostalCode Test', () async {
-      final List<Station>? data =
+      final Iterable<Station>? data =
           await api.stationsByPostalCode(postalCode: 24558);
       expect(data, isNotNull);
       expect(data, isNotEmpty);
@@ -35,7 +35,7 @@ void main() {
     });
 
     test('getStationsByIds Test', () async {
-      final List<Station>? data = await api.stationsByIds(ids: <String>[
+      final Iterable<Station>? data = await api.stationsByIds(ids: <String>[
         '92f703e8-0b3c-46da-9948-25cb1a6a1514',
         '83d5ac80-4f23-4106-b054-7c7704bfcb95',
       ]);

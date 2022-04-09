@@ -41,17 +41,15 @@ class Station {
       country: json['country'] as String,
       closesAt: closeTime == null ? null : DateTime.parse(closeTime as String),
       opensAt: openTime == null ? null : DateTime.parse(openTime as String),
-      fuels: Fuel.fromJsonList(json['fuels']),
+      fuels: Fuel.fromJsonList(json['fuels']).toList(growable: false),
     );
   }
 
-  static List<Station>? fromJsonList(dynamic json) {
+  static Iterable<Station>? fromJsonList(dynamic json) {
     final dynamic stations = json['stations'];
 
     if (stations is List) {
-      return <Station>[
-        for (dynamic jsonStation in stations) Station.fromJson(jsonStation),
-      ];
+      return stations.map<Station>(Station.fromJson);
     }
 
     return null;
