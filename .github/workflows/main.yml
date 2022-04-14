@@ -26,6 +26,9 @@ jobs:
       - name: Analyze code
         run: dart analyze --fatal-infos
 
+      - name: Collect dart code metrics
+        run: dart run dart_code_metrics:metrics analyze lib
+
       - name: Run test suite
         env:
           API_KEY: ${{ secrets.API_KEY }}

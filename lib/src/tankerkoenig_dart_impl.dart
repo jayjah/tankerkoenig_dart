@@ -49,8 +49,9 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<Iterable<Station>?> stationsByPostalCode(
-      {required int postalCode}) async {
+  Future<Iterable<Station>?> stationsByPostalCode({
+    required int postalCode,
+  }) async {
     final Response<dynamic> response =
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 

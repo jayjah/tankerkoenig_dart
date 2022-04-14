@@ -5,35 +5,10 @@ part of 'models.dart';
 /// Statistic data class
 ///   Holds specific statistic types in a list
 class Statistic {
-  final List<StatisticType> stats;
+  final Iterable<StatisticType> stats;
   const Statistic(this.stats);
-  factory Statistic.fromJson(dynamic json) {
-    return Statistic(StatType.values.map<StatisticType>((StatType e) {
-      switch (e) {
-        case StatType.diesel:
-          return StatisticType(
-            e,
-            int.parse(json['Diesel']['count']!.toString()),
-            double.parse(json['Diesel']['mean']!.toString()),
-            double.parse(json['Diesel']['median']!.toString()),
-          );
-        case StatType.e5:
-          return StatisticType(
-            e,
-            int.parse(json['E5']['count']!.toString()),
-            double.parse(json['E5']['mean']!.toString()),
-            double.parse(json['E5']['median']!.toString()),
-          );
-        case StatType.e10:
-          return StatisticType(
-            e,
-            int.parse(json['E10']['count']!.toString()),
-            double.parse(json['E10']['mean']!.toString()),
-            double.parse(json['E10']['median']!.toString()),
-          );
-      }
-    }).toList(growable: false));
-  }
+  factory Statistic.fromJson(dynamic json) => Statistic(StatType.values
+      .map<StatisticType>((StatType e) => _statTypeFromJson(json, e)));
 
   @override
   bool operator ==(Object other) =>
@@ -76,4 +51,30 @@ class StatisticType {
   @override
   String toString() =>
       'StatisticType{name: $name, count: $count, mean: $mean, median: $median}';
+}
+
+StatisticType _statTypeFromJson(dynamic json, StatType givenStatType) {
+  switch (givenStatType) {
+    case StatType.diesel:
+      return StatisticType(
+        givenStatType,
+        int.parse(json['Diesel']['count']!.toString()),
+        double.parse(json['Diesel']['mean']!.toString()),
+        double.parse(json['Diesel']['median']!.toString()),
+      );
+    case StatType.e5:
+      return StatisticType(
+        givenStatType,
+        int.parse(json['E5']['count']!.toString()),
+        double.parse(json['E5']['mean']!.toString()),
+        double.parse(json['E5']['median']!.toString()),
+      );
+    case StatType.e10:
+      return StatisticType(
+        givenStatType,
+        int.parse(json['E10']['count']!.toString()),
+        double.parse(json['E10']['mean']!.toString()),
+        double.parse(json['E10']['median']!.toString()),
+      );
+  }
 }

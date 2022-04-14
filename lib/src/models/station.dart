@@ -13,7 +13,7 @@ class Station {
   final String brand;
   final DateTime? closesAt;
   final DateTime? opensAt;
-  final List<Fuel> fuels;
+  final Iterable<Fuel> fuels;
   const Station({
     required this.name,
     required this.street,
@@ -28,8 +28,8 @@ class Station {
   });
 
   factory Station.fromJson(dynamic json) {
-    final dynamic closeTime = json['closesAt'];
-    final dynamic openTime = json['opensAt'];
+    final dynamic closeTime = json?['closesAt'];
+    final dynamic openTime = json?['opensAt'];
 
     return Station(
       name: json['name'] as String,
@@ -41,7 +41,7 @@ class Station {
       country: json['country'] as String,
       closesAt: closeTime == null ? null : DateTime.parse(closeTime as String),
       opensAt: openTime == null ? null : DateTime.parse(openTime as String),
-      fuels: Fuel.fromJsonList(json['fuels']).toList(growable: false),
+      fuels: Fuel.fromJsonList(json['fuels']),
     );
   }
 

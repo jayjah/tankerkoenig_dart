@@ -241,6 +241,7 @@ dart_code_metrics:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "**/*.file.dart"
+    - "**/*.chopper.dart"
   rules:
     - newline-before-return
     - no-boolean-literal-compare
