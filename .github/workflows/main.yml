@@ -27,7 +27,7 @@ jobs:
         run: dart analyze --fatal-infos
 
       - name: Collect dart code metrics
-        run: dart run dart_code_metrics:metrics analyze lib
+        run: dart run dart_code_metrics:metrics analyze --reporter=github lib
 
       - name: Run test suite
         env:
