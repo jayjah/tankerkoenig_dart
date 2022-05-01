@@ -11,12 +11,10 @@ class LastChange {
     required this.timeStamp,
   });
 
-  factory LastChange.fromJson(dynamic json) {
-    return LastChange(
-      amount: json['amount'] as double,
-      timeStamp: DateTime.parse(json['timestamp'] as String),
-    );
-  }
+  factory LastChange.fromJson(dynamic json) => LastChange(
+        amount: json['amount'] as double,
+        timeStamp: DateTime.parse(json['timestamp'] as String),
+      );
 
   @override
   bool operator ==(Object other) =>

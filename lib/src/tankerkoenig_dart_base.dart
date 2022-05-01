@@ -1,4 +1,11 @@
+import 'dart:convert';
+
+import 'package:chopper/chopper.dart';
 import 'package:tankerkoenig_dart/src/models/models.dart';
+
+extension JsonDecoder on String {
+  dynamic get asDecodedJson => jsonDecode(this);
+}
 
 /// Basic interface class for tankerkoenig api
 abstract class TankerKoenigDartApi {
@@ -12,8 +19,8 @@ abstract class TankerKoenigDartApi {
   Future<Station?> stationById({required String id});
   Future<Statistic> statistics();
 
-  Exception exceptionFromResponse(int statusCode) {
-    switch (statusCode) {
+  Exception exceptionFromResponse(Response<dynamic> response) {
+    switch (response.statusCode) {
       case 400:
         return const TankerKoenigException(
           'Bad Request',
@@ -35,7 +42,11 @@ abstract class TankerKoenigDartApi {
           503,
         );
       default:
-        return TankerKoenigException('API Unknown error', statusCode);
+        return TankerKoenigException(
+          'API Unknown error',
+          response.statusCode,
+          response,
+        );
     }
   }
 }

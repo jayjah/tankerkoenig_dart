@@ -7,8 +7,11 @@ part of 'models.dart';
 class Statistic {
   final Iterable<StatisticType> stats;
   const Statistic(this.stats);
-  factory Statistic.fromJson(dynamic json) => Statistic(StatType.values
-      .map<StatisticType>((StatType e) => _statTypeFromJson(json, e)));
+  factory Statistic.fromJson(dynamic json) => Statistic(
+        StatType.values.map<StatisticType>(
+          (StatType e) => _statTypeFromJson(json, e),
+        ),
+      );
 
   @override
   bool operator ==(Object other) =>

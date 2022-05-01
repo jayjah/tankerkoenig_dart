@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
-
 import 'package:chopper/chopper.dart';
 import 'package:tankerkoenig_dart/src/client/client.dart';
 import 'package:tankerkoenig_dart/src/models/models.dart';
@@ -36,10 +34,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     );
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(jsonDecode(response.bodyString));
+    return Station.fromJsonList(response.bodyString.asDecodedJson);
   }
 
   /// Retrieve gas stations by given [postalCode]. Those value
@@ -56,10 +54,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(jsonDecode(response.bodyString));
+    return Station.fromJsonList(response.bodyString.asDecodedJson);
   }
 
   /// Retrieve statistics about gas types. These are normally `Diesel`, `E5`
@@ -71,14 +69,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     final Response<dynamic> response = await _client.getStatistics(_apiKey);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response);
     }
 
-    return Statistic.fromJson(
-      jsonDecode(
-        response.bodyString,
-      ),
-    );
+    return Statistic.fromJson(response.bodyString.asDecodedJson);
   }
 
   /// Retrieve gas station by given [id].
@@ -96,10 +90,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     );
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(jsonDecode(response.bodyString))?.first;
+    return Station.fromJsonList(response.bodyString.asDecodedJson)?.first;
   }
 
   /// Retrieve gas stations by given [ids].
@@ -115,9 +109,11 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         await _client.getStationsByIds(_apiKey, ids);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response.statusCode);
+      throw exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(jsonDecode(response.bodyString));
+    return Station.fromJsonList(
+      response.bodyString.asDecodedJson,
+    );
   }
 }

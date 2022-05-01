@@ -15,14 +15,12 @@ class Fuel {
     required this.lastChange,
   });
 
-  factory Fuel.fromJson(dynamic json) {
-    return Fuel(
-      name: json['name'] as String,
-      category: json['category'] as String,
-      price: json['price'] as double,
-      lastChange: LastChange.fromJson(json['lastChange']),
-    );
-  }
+  factory Fuel.fromJson(dynamic json) => Fuel(
+        name: json['name'] as String,
+        category: json['category'] as String,
+        price: json['price'] as double,
+        lastChange: LastChange.fromJson(json['lastChange']),
+      );
 
   static Iterable<Fuel> fromJsonList(dynamic json) {
     if (json is List) {
