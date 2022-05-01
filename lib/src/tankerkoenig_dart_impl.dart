@@ -11,7 +11,9 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   final TankerKoenigClient _client;
 
   TankerKoenigApi(this._apiKey)
-      : _client = TankerKoenigClient.create(ChopperClient());
+      : assert(
+            _apiKey.isNotEmpty, 'Provided api key must be a non empty string!'),
+        _client = TankerKoenigClient.create(ChopperClient());
 
   /// Retrieve gas stations by given [latitude] and [longitude]. Those values
   ///   must be provided.
