@@ -26,7 +26,7 @@ class Fuel {
 
   static Iterable<Fuel> fromJsonList(dynamic json) {
     if (json is List) {
-      return json.map<Fuel>(Fuel.fromJson).toList(growable: false);
+      return json.map<Fuel>(Fuel.fromJson);
     }
 
     return const <Fuel>[];
