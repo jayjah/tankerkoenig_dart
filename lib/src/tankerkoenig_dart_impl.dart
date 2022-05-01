@@ -50,6 +50,12 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   Future<Iterable<Station>?> stationsByPostalCode({
     required int postalCode,
   }) async {
+    assert(
+        !postalCode.isNaN &&
+            !postalCode.isNegative &&
+            postalCode.toString().isNotEmpty,
+        'Provided postalcode must be a positive number!');
+
     final Response<dynamic> response =
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
