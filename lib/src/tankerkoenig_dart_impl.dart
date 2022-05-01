@@ -26,6 +26,13 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     required double longitude,
     int radius = 10,
   }) async {
+    assert(!latitude.isNaN && latitude.toString().isNotEmpty,
+        'Provided latitude must be a valid double value! e.G. 53.223');
+    assert(!longitude.isNaN && longitude.toString().isNotEmpty,
+        'Provided longitude must be a valid double value! e.G. 53.223');
+    assert(!radius.isNaN && radius.toString().isNotEmpty && radius >= 0,
+        'Provided radius must be a valid int value and at least 0! e.G. 0,1,2,3,4,5,..');
+
     final Response<dynamic> response = await _client.getStationsByLatLng(
       _apiKey,
       latitude,
