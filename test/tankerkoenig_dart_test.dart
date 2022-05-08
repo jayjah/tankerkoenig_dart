@@ -31,18 +31,30 @@ void main() {
     });
 
     test('getStationById Test', () async {
-      final Station? data =
-          await api.stationById(id: '92f703e8-0b3c-46da-9948-25cb1a6a1514');
+      const String id = '92f703e8-0b3c-46da-9948-25cb1a6a1514';
+      final Station? data = await api.stationById(id: id);
       expect(data, isNotNull);
+      expect(true, id == data!.id);
     });
 
     test('getStationsByIds Test', () async {
-      final Iterable<Station>? data = await api.stationsByIds(ids: <String>[
+      const List<String> ids = <String>[
         '92f703e8-0b3c-46da-9948-25cb1a6a1514',
         '83d5ac80-4f23-4106-b054-7c7704bfcb95',
-      ]);
+      ];
+
+      final Iterable<Station>? data = await api.stationsByIds(ids: ids);
       expect(data, isNotNull);
       expect(data, isNotEmpty);
+      expect(data!.length, ids.length);
+      expect(
+        true,
+        data.where((Station element) => element.id == ids.first).isNotEmpty,
+      );
+      expect(
+        true,
+        data.where((Station element) => element.id == ids.last).isNotEmpty,
+      );
     });
 
     test('getStatistics Test', () async {
