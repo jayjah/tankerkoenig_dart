@@ -19,4 +19,4 @@ dev_dependencies:
   test: ^1.21.1
   chopper_generator: any
   build_runner: any
-  dart_code_metrics: ^4.14.0
+  dart_code_metrics: ^4.15.0
