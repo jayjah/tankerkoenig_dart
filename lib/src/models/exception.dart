@@ -4,6 +4,10 @@ part of 'models.dart';
 class TankerKoenigException implements Exception {
   final String message;
   final int? code;
-  final dynamic response;
+  final Response<dynamic>? response;
   const TankerKoenigException([this.message = "", this.code, this.response]);
+
+  @override
+  String toString() =>
+      'TankerKoenigException{message: $message, code: $code, ${response == null ? '' : 'response body: ${response!.bodyString}'}';
 }

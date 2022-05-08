@@ -1,9 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:chopper/chopper.dart';
-import 'package:tankerkoenig_dart/src/client/client.dart';
-import 'package:tankerkoenig_dart/src/models/models.dart';
-import 'package:tankerkoenig_dart/src/tankerkoenig_dart_base.dart';
+part of 'api.dart';
 
 /// Basic implementation class for tankerkoenig api of [TankerKoenigDartApi]
 class TankerKoenigApi extends TankerKoenigDartApi {

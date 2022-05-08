@@ -1,7 +1,4 @@
-import 'dart:convert';
-
-import 'package:chopper/chopper.dart';
-import 'package:tankerkoenig_dart/src/models/models.dart';
+part of 'api.dart';
 
 extension JsonDecoder on String {
   dynamic get asDecodedJson => jsonDecode(this);

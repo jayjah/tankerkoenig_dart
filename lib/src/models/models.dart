@@ -1,4 +1,4 @@
-library models;
+import 'package:chopper/chopper.dart';
 
 part 'fuel.dart';
 part 'exception.dart';
