@@ -27,7 +27,7 @@ class Station {
     required this.fuels,
   });
 
-  factory Station.fromJson(dynamic json) {
+  factory Station.fromJson(final dynamic json) {
     final dynamic closeTime = json?['closesAt'];
     final dynamic openTime = json?['opensAt'];
 
@@ -45,7 +45,7 @@ class Station {
     );
   }
 
-  static Iterable<Station>? fromJsonList(dynamic json) {
+  static Iterable<Station>? fromJsonList(final dynamic json) {
     final dynamic stations = json['stations'];
 
     if (stations is List) {

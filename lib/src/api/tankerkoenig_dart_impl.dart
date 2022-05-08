@@ -21,9 +21,9 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   /// It may return [Null] on unexpected parse error.
   @override
   Future<Iterable<Station>?> stationsByLatLng({
-    required double latitude,
-    required double longitude,
-    int radius = 10,
+    required final double latitude,
+    required final double longitude,
+    final int radius = 10,
   }) async {
     assert(!latitude.isNaN && latitude.toString().isNotEmpty,
         'Provided latitude must be a valid double value! e.G. 53.223');
@@ -54,7 +54,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   /// It may return [Null] on unexpected parse error.
   @override
   Future<Iterable<Station>?> stationsByPostalCode({
-    required int postalCode,
+    required final int postalCode,
   }) async {
     assert(
         !postalCode.isNaN &&
@@ -93,7 +93,9 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<Station?> stationById({required String id}) async {
+  Future<Station?> stationById({
+    required final String id,
+  }) async {
     assert(id.isNotEmpty, 'Provided id must not be empty!');
 
     final Response<dynamic> response = await _client.getStationsByIds(
@@ -114,7 +116,9 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   ///
   /// It may return [Null] on unexpected parse error.
   @override
-  Future<Iterable<Station>?> stationsByIds({required List<String> ids}) async {
+  Future<Iterable<Station>?> stationsByIds({
+    required final List<String> ids,
+  }) async {
     assert(ids.isNotEmpty, 'Provided ids must not be empty!');
 
     final Response<dynamic> response =

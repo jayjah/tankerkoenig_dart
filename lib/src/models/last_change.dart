@@ -11,7 +11,7 @@ class LastChange {
     required this.timeStamp,
   });
 
-  factory LastChange.fromJson(dynamic json) => LastChange(
+  factory LastChange.fromJson(final dynamic json) => LastChange(
         amount: json['amount'] as double,
         timeStamp: DateTime.parse(json['timestamp'] as String),
       );

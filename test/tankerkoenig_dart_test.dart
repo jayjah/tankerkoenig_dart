@@ -16,7 +16,9 @@ void main() {
 
     test('getStationsByLatLng Test', () async {
       final Iterable<Station>? data = await api.stationsByLatLng(
-          latitude: 52.52099975265203, longitude: 13.43803882598877);
+        latitude: 52.52099975265203,
+        longitude: 13.43803882598877,
+      );
       expect(data, isNotNull);
       expect(data, isNotEmpty);
     });

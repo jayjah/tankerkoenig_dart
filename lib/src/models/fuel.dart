@@ -15,14 +15,14 @@ class Fuel {
     required this.lastChange,
   });
 
-  factory Fuel.fromJson(dynamic json) => Fuel(
+  factory Fuel.fromJson(final dynamic json) => Fuel(
         name: json['name'] as String,
         category: json['category'] as String,
         price: json['price'] as double,
         lastChange: LastChange.fromJson(json['lastChange']),
       );
 
-  static Iterable<Fuel> fromJsonList(dynamic json) {
+  static Iterable<Fuel> fromJsonList(final dynamic json) {
     if (json is List) {
       return json.map<Fuel>(Fuel.fromJson);
     }

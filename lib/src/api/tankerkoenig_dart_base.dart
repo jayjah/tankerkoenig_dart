@@ -7,16 +7,24 @@ extension JsonDecoder on String {
 /// Basic interface class for tankerkoenig api
 abstract class TankerKoenigDartApi {
   Future<Iterable<Station>?> stationsByLatLng({
-    required double latitude,
-    required double longitude,
-    int radius = 10,
+    required final double latitude,
+    required final double longitude,
+    final int radius = 10,
   });
-  Future<Iterable<Station>?> stationsByPostalCode({required int postalCode});
-  Future<Iterable<Station>?> stationsByIds({required List<String> ids});
-  Future<Station?> stationById({required String id});
+  Future<Iterable<Station>?> stationsByPostalCode({
+    required final int postalCode,
+  });
+  Future<Iterable<Station>?> stationsByIds({
+    required final List<String> ids,
+  });
+  Future<Station?> stationById({
+    required final String id,
+  });
   Future<Statistic> statistics();
 
-  Exception exceptionFromResponse(Response<dynamic> response) {
+  Exception exceptionFromResponse(
+    final Response<dynamic> response,
+  ) {
     switch (response.statusCode) {
       case 400:
         return const TankerKoenigException(
