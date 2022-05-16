@@ -40,7 +40,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     );
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response);
+      throw _exceptionFromResponse(response);
     }
 
     return Station.fromJsonList(response.bodyString.asDecodedJson);
@@ -66,7 +66,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         await _client.getStationsByPostalCode(_apiKey, postalCode);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response);
+      throw _exceptionFromResponse(response);
     }
 
     return Station.fromJsonList(response.bodyString.asDecodedJson);
@@ -81,7 +81,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     final Response<dynamic> response = await _client.getStatistics(_apiKey);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response);
+      throw _exceptionFromResponse(response);
     }
 
     return Statistic.fromJson(response.bodyString.asDecodedJson);
@@ -104,7 +104,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
     );
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response);
+      throw _exceptionFromResponse(response);
     }
 
     return Station.fromJsonList(response.bodyString.asDecodedJson)?.first;
@@ -125,7 +125,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
         await _client.getStationsByIds(_apiKey, ids);
 
     if (response.statusCode != 200) {
-      throw exceptionFromResponse(response);
+      throw _exceptionFromResponse(response);
     }
 
     return Station.fromJsonList(

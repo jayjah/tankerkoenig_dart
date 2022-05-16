@@ -22,7 +22,7 @@ abstract class TankerKoenigDartApi {
   });
   Future<Statistic> statistics();
 
-  Exception exceptionFromResponse(
+  Exception _exceptionFromResponse(
     final Response<dynamic> response,
   ) {
     switch (response.statusCode) {

@@ -1,3 +1,5 @@
+library tankerkoenig_dart.api;
+
 import 'dart:convert' show jsonDecode;
 
 import 'package:chopper/chopper.dart';
