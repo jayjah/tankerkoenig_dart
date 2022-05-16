@@ -1,4 +1,4 @@
-part of 'models.dart';
+part of 'api.dart';
 
 /// Exception class
 class TankerKoenigException implements Exception {
