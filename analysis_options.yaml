@@ -233,6 +233,7 @@ dart_code_metrics:
     source-lines-of-code: 80
   metrics-exclude:
     - "test/**"
+    - "example/**"
     - "lib/localization/**"
     - "lib/src/assets/**"
     - "**/*.g.dart"
