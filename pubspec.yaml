@@ -16,7 +16,7 @@ dependencies:
 
 dev_dependencies:
   lints: ^2.0.0
-  test: ^1.21.1
+  test: ^1.21.2
   chopper_generator: any
   build_runner: any
   dart_code_metrics: ^4.15.1
