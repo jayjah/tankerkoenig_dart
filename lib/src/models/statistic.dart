@@ -18,7 +18,7 @@ class Statistic {
       identical(this, other) ||
       other is Statistic &&
           runtimeType == other.runtimeType &&
-          stats == other.stats;
+          hashCode == other.hashCode;
 
   @override
   int get hashCode => stats.hashCode;
@@ -42,10 +42,7 @@ class StatisticType {
       identical(this, other) ||
       other is StatisticType &&
           runtimeType == other.runtimeType &&
-          name == other.name &&
-          count == other.count &&
-          mean == other.mean &&
-          median == other.median;
+          hashCode == other.hashCode;
 
   @override
   int get hashCode =>

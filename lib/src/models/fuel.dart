@@ -35,10 +35,7 @@ class Fuel {
       identical(this, other) ||
       other is Fuel &&
           runtimeType == other.runtimeType &&
-          name == other.name &&
-          category == other.category &&
-          price == other.price &&
-          lastChange == other.lastChange;
+          hashCode == other.hashCode;
 
   @override
   int get hashCode =>

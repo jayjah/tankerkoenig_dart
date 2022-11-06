@@ -21,8 +21,7 @@ class LastChange {
       identical(this, other) ||
       other is LastChange &&
           runtimeType == other.runtimeType &&
-          amount == other.amount &&
-          timeStamp == other.timeStamp;
+          hashCode == other.hashCode;
 
   @override
   int get hashCode => amount.hashCode ^ timeStamp.hashCode;

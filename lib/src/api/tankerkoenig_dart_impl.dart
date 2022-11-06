@@ -7,10 +7,10 @@ class TankerKoenigApi extends TankerKoenigDartApi {
   final String _apiKey;
   final TankerKoenigClient _client;
 
-  TankerKoenigApi(this._apiKey)
+  TankerKoenigApi(this._apiKey, {TankerKoenigClient? client})
       : assert(
             _apiKey.isNotEmpty, 'Provided api key must be a non empty string!'),
-        _client = TankerKoenigClient.create(ChopperClient());
+        _client = client ?? TankerKoenigClient.create(ChopperClient());
 
   /// Retrieve gas stations by given [latitude] and [longitude]. Those values
   ///   must be provided.
@@ -43,7 +43,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       throw _exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(response.bodyString.asDecodedJson);
+    return Station.listFromJson(response.bodyString.asDecodedJson);
   }
 
   /// Retrieve gas stations by given [postalCode]. Those value
@@ -69,7 +69,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       throw _exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(response.bodyString.asDecodedJson);
+    return Station.listFromJson(response.bodyString.asDecodedJson);
   }
 
   /// Retrieve statistics about gas types. These are normally `Diesel`, `E5`
@@ -107,7 +107,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       throw _exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(response.bodyString.asDecodedJson)?.first;
+    return Station.listFromJson(response.bodyString.asDecodedJson)?.first;
   }
 
   /// Retrieve gas stations by given [ids].
@@ -128,7 +128,7 @@ class TankerKoenigApi extends TankerKoenigDartApi {
       throw _exceptionFromResponse(response);
     }
 
-    return Station.fromJsonList(
+    return Station.listFromJson(
       response.bodyString.asDecodedJson,
     );
   }

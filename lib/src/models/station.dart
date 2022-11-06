@@ -22,9 +22,9 @@ class Station {
     required this.id,
     required this.brand,
     required this.country,
+    required this.fuels,
     this.closesAt,
     this.opensAt,
-    required this.fuels,
   });
 
   factory Station.fromJson(final dynamic json) {
@@ -45,7 +45,7 @@ class Station {
     );
   }
 
-  static Iterable<Station>? fromJsonList(final dynamic json) {
+  static Iterable<Station>? listFromJson(final dynamic json) {
     final dynamic stations = json['stations'];
 
     if (stations is List) {
@@ -60,15 +60,7 @@ class Station {
       identical(this, other) ||
       other is Station &&
           runtimeType == other.runtimeType &&
-          name == other.name &&
-          street == other.street &&
-          postalCode == other.postalCode &&
-          place == other.place &&
-          id == other.id &&
-          country == other.country &&
-          closesAt == other.closesAt &&
-          opensAt == other.opensAt &&
-          fuels == other.fuels;
+          hashCode == other.hashCode;
 
   @override
   int get hashCode =>
