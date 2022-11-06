@@ -1,3 +1,7 @@
+## 1.0.2
+- update dependencies
+- minor code improvements
+
 ## 1.0.0
 
 - stable release version
