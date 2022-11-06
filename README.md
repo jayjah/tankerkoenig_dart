@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-![Dart](https://img.shields.io/badge/Dart-2.16.1-green)
+![Dart](https://img.shields.io/badge/Dart-2.18.4-green)
 [![pub](https://img.shields.io/pub/v/tankerkoenig_dart.svg)](https://pub.dev/packages/tankerkoenig_dart)
 
 A dart package to retrieve germans gas stations and gas prices from tankerkoenig v4 API.
