@@ -10,7 +10,7 @@ class Station {
   final String place;
   final String id;
   final String country;
-  final String brand;
+  final String? brand;
   final DateTime? closesAt;
   final DateTime? opensAt;
   final Iterable<Fuel> fuels;
@@ -27,6 +27,39 @@ class Station {
     this.opensAt,
   });
 
+  double get e10Price {
+    try {
+      return fuels
+          .firstWhere(
+              (Fuel element) => element.name.toLowerCase().trim() == 'supere10')
+          .price;
+    } on StateError {
+      return 0.0;
+    }
+  }
+
+  double get e5Price {
+    try {
+      return fuels
+          .firstWhere(
+              (Fuel element) => element.name.toLowerCase().trim() == 'supere5')
+          .price;
+    } on StateError {
+      return 0.0;
+    }
+  }
+
+  double get dieselPrice {
+    try {
+      return fuels
+          .firstWhere(
+              (Fuel element) => element.name.toLowerCase().trim() == 'diesel')
+          .price;
+    } on StateError {
+      return 0.0;
+    }
+  }
+
   factory Station.fromJson(final dynamic json) {
     final dynamic closeTime = json?['closesAt'];
     final dynamic openTime = json?['opensAt'];
@@ -37,11 +70,11 @@ class Station {
       postalCode: json['postalCode'] as String,
       place: json['place'] as String,
       id: json['id'] as String,
-      brand: json['brand'] as String,
+      brand: json['brand'] as String?,
       country: json['country'] as String,
       closesAt: closeTime == null ? null : DateTime.parse(closeTime as String),
       opensAt: openTime == null ? null : DateTime.parse(openTime as String),
-      fuels: Fuel.fromJsonList(json['fuels']),
+      fuels: Fuel.listFromJson(json['fuels']),
     );
   }
 

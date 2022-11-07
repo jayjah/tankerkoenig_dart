@@ -22,7 +22,7 @@ class Fuel {
         lastChange: LastChange.fromJson(json['lastChange']),
       );
 
-  static Iterable<Fuel> fromJsonList(final dynamic json) {
+  static Iterable<Fuel> listFromJson(final dynamic json) {
     if (json is List) {
       return json.map<Fuel>(Fuel.fromJson);
     }
