@@ -1,3 +1,7 @@
+## 1.0.3
+- minor fixes
+- add: latitude && longitude to location, minor price getters
+
 ## 1.0.2
 - update dependencies
 - minor code improvements
