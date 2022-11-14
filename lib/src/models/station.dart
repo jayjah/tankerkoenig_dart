@@ -10,6 +10,8 @@ class Station {
   final String place;
   final String id;
   final String country;
+  final double latitude;
+  final double longitude;
   final String? brand;
   final DateTime? closesAt;
   final DateTime? opensAt;
@@ -23,6 +25,8 @@ class Station {
     required this.brand,
     required this.country,
     required this.fuels,
+    required this.longitude,
+    required this.latitude,
     this.closesAt,
     this.opensAt,
   });
@@ -67,6 +71,8 @@ class Station {
     return Station(
       name: json['name'] as String,
       street: json['street'] as String,
+      longitude: json['coords']['lng'] as double,
+      latitude: json['coords']['lat'] as double,
       postalCode: json['postalCode'] as String,
       place: json['place'] as String,
       id: json['id'] as String,
