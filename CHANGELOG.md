@@ -1,4 +1,7 @@
 ## 1.0.3
+- dart 3 support
+
+## 1.0.3
 - minor fixes
 - add: latitude && longitude to location, minor price getters
 

@@ -23,8 +23,8 @@ class _$TankerKoenigClient extends TankerKoenigClient {
     double longitude,
     int radius,
   ) {
-    final String $url =
-        'https://creativecommons.tankerkoenig.de/api/v4/stations/search?lat=${latitude}&lng=${longitude}&rad=${radius}&apikey=${apiKey}';
+    final Uri $url = Uri.parse(
+        'https://creativecommons.tankerkoenig.de/api/v4/stations/search?lat=${latitude}&lng=${longitude}&rad=${radius}&apikey=${apiKey}');
     final Map<String, String> $headers = {
       'Content-Type': 'application/json',
     };
@@ -42,8 +42,8 @@ class _$TankerKoenigClient extends TankerKoenigClient {
     String apiKey,
     int postalCode,
   ) {
-    final String $url =
-        'https://creativecommons.tankerkoenig.de/api/v4/stations/postalcode?postalcode=${postalCode}&apikey=${apiKey}';
+    final Uri $url = Uri.parse(
+        'https://creativecommons.tankerkoenig.de/api/v4/stations/postalcode?postalcode=${postalCode}&apikey=${apiKey}');
     final Map<String, String> $headers = {
       'Content-Type': 'application/json',
     };
@@ -61,8 +61,8 @@ class _$TankerKoenigClient extends TankerKoenigClient {
     String apiKey,
     List<String> ids,
   ) {
-    final String $url =
-        'https://creativecommons.tankerkoenig.de/api/v4/stations/ids?ids=${ids.join(',')}&apikey=${apiKey}';
+    final Uri $url = Uri.parse(
+        'https://creativecommons.tankerkoenig.de/api/v4/stations/ids?ids=${ids}&apikey=${apiKey}');
     final Map<String, String> $headers = {
       'Content-Type': 'application/json',
     };
@@ -77,8 +77,8 @@ class _$TankerKoenigClient extends TankerKoenigClient {
 
   @override
   Future<Response<dynamic>> getStatistics(String apiKey) {
-    final String $url =
-        'https://creativecommons.tankerkoenig.de/api/v4/stats?apikey=${apiKey}';
+    final Uri $url = Uri.parse(
+        'https://creativecommons.tankerkoenig.de/api/v4/stats?apikey=${apiKey}');
     final Map<String, String> $headers = {
       'Content-Type': 'application/json',
     };
